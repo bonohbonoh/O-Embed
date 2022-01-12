@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseDto {
+
     private String url;
     private String title;
     private String author_name;
@@ -21,4 +22,5 @@ public class ResponseDto {
     private String provider_name;
     private String provider_url;
     private String version;
+
 }
