@@ -2,7 +2,10 @@ package com.example.OEmbed.service;
 
 import com.example.OEmbed.dto.ResponseDto;
 import com.example.OEmbed.exception.UrlMissMatchException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -11,45 +14,59 @@ import java.net.URISyntaxException;
 import java.util.regex.Pattern;
 
 @Service
+@RequiredArgsConstructor
 public class OembedService {
 
-    private final static String TWITTER_URL = "https://publish.twitter.com/oembed?url=";
+    @Value("${URL.twitter}")
+    private String TWITTER_URL;
 
-    public String getPlatformName(String requestUri) throws URISyntaxException {
+    private final RestTemplate restTemplate;
+    private final ObjectMapper objectMapper;
 
-        URI uri = new URI(requestUri);
+    private String getUrl(String requestUrl) throws URISyntaxException {
+        URI uri = new URI(requestUrl);
         String platform = uri.getHost();
-        if (platform.contains("www.")) {
-            platform = platform.replaceAll("www.", "");
-        }
-        if (platform.contains(".com")) {
-            platform = platform.replaceAll(".com", "");
+        if (platform == null) {
+            throw new UrlMissMatchException("잘못된 Url 입니다.");
         }
         return platform;
     }
 
-    public ResponseDto callEmbedProcess(String requestUri) throws Exception {
+    private String getPlatformName(String requestUrl) throws URISyntaxException {
 
-        String platform = getPlatformName(requestUri);
-        if (platform.equals("twitter")) {
-            return getTwitterHTML(requestUri);
+        String url = getUrl(requestUrl);
+
+        if (url.contains("www.")) {
+            url = url.replaceAll("www.", "");
         }
-        throw new UrlMissMatchException("nope");
+        if (url.contains(".com")) {
+            url = url.replaceAll(".com", "");
+        }
+        return url;
     }
 
-    private ResponseDto getTwitterHTML(String paramUrl) throws Exception{
+    public ResponseDto callEmbedProcess(String requestUri) throws URISyntaxException, JsonProcessingException {
+
+        String platform = getPlatformName(requestUri);
+        switch (platform) {
+            case "twitter":
+                return getTwitterHTML(requestUri);
+            default:
+                throw new UrlMissMatchException("잘못된 Url 입니다.");
+        }
+
+    }
+
+    public ResponseDto getTwitterHTML(String paramUrl) throws URISyntaxException, JsonProcessingException {
 
         // 트위터 포스트 확인
         boolean isTwitterPost = Pattern.compile("(https://twitter.com/.*/status/.*?)").matcher(paramUrl).find();
         if (!isTwitterPost) {
-            throw new UrlMissMatchException("잘못된 Url형식 입니다.");
+            throw new UrlMissMatchException("잘못된 Url 입니다.");
         }
 
-        RestTemplate template = new RestTemplate();
-        ObjectMapper objectMapper = new ObjectMapper();
-
         // API 요청
-        String response = template.getForObject(TWITTER_URL + paramUrl, String.class);
+        String response = restTemplate.getForObject(TWITTER_URL + paramUrl, String.class);
 
         return objectMapper.readValue(response, ResponseDto.class);
     }
