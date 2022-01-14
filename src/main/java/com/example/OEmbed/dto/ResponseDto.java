@@ -10,17 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResponseDto {
 
-    private String url;
-    private String title;
+    private String type;
+    private String version;
     private String author_name;
     private String author_url;
     private String html;
-    private String width;
-    private String height;
-    private String type;
-    private String cache_age;
+    private Integer width;
+    private Integer height;
     private String provider_name;
     private String provider_url;
-    private String version;
 
 }
