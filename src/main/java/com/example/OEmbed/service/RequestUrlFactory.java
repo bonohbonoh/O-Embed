@@ -15,7 +15,7 @@ public class RequestUrlFactory {
 
     private final TwitterUrlService twitterUrlService;
     private final InstagramUrlService instagramUrlService;
-    private final YoutubeRulService youtubeRulService;
+    private final YoutubeUrlService youtubeRulService;
     private final VimeoUrlService vimeoUrlService;
 
     private String getUrl(String requestUrl) throws URISyntaxException {

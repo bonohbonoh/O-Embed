@@ -13,7 +13,7 @@ public class OembedService {
 
     private final RequestUrlFactory requestUrlFactory;
 
-    public ResponseDto callUrl(String requestUrl) throws URISyntaxException, JsonProcessingException{
+    public ResponseDto callUrl(String requestUrl) throws URISyntaxException, JsonProcessingException {
         return requestUrlFactory.callEmbedProcess(requestUrl);
     }
 }
