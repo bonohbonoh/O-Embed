@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class VimeoDto extends ResponseDto {
 
     private Long video_id;
-    private String title;
     private String is_plus;
     private String account_type;
     private String description;

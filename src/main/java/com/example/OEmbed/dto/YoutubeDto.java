@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class YoutubeDto extends ResponseDto {
 
-    private String title;
     private String thumbnail_url;
     private Integer thumbnail_width;
     private Integer thumbnail_height;

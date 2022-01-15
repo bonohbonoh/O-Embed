@@ -11,7 +11,6 @@ public class InstagramDto extends ResponseDto {
 
     private Long author_id;
     private String media_id;
-    private String title;
     private String thumbnail_url;
     private Integer thumbnail_width;
     private Integer thumbnail_height;
