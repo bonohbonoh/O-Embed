@@ -1,2 +1,5 @@
 URL:
   twitter: "https://publish.twitter.com/oembed?url="
+  instagram: "https://api.instagram.com/oembed?url="
+  youtube: "https://www.youtube.com/oembed?url="
+  vimeo: "https://vimeo.com/api/oembed.json?url="

@@ -1,0 +1,41 @@
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<div class="container search-table">
+    <div class="search-box">
+        <div class="row">
+            <div class="col-md-3">
+                <h5>Url을 입력해주세요</h5>
+            </div>
+            <div class="col-md-9">
+                <input type="text" id="urlText" onkeyup="main.waitEnter()" class="form-control" placeholder="Search all fields e.g. HTML">
+            </div>
+        </div>
+    </div>
+    <div class="search-list">
+        <h3>O-Embed Test</h3>
+        <table class="table" id="myTable">
+            <thead>
+            <tr>
+                <th>key</th>
+                <th>value</th>
+            </tr>
+
+            </thead>
+            <tbody id = "list">
+
+            </tbody>
+        </table>
+
+        <footer>
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script type="text/javascript" src="/index.js" ></script>
+            <script src="/footer.html"></script>
+        </footer>
+
+    </div>
+</div>
+
+<html/>

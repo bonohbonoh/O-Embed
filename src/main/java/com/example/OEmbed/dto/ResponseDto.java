@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseDto {
+public abstract class ResponseDto {
 
     private String version;
     private String type;
