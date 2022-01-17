@@ -22,9 +22,6 @@ var main = {
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
 
-            error: function (err) {
-                renderList.innerHTML += "";
-            },
             success: function (response) {
                 console.log(response)
                 renderList.innerHTML = "";
